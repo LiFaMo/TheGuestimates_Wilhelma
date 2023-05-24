@@ -1,0 +1,9 @@
+Questions:
+
+How exactly should the schedule for visitors (as special service) look like? 
+
+How does mapping work? 
+
+Do we have to inlcude emotions? 
+
+Problems with forking

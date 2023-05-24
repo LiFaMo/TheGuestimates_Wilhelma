@@ -1,0 +1,70 @@
+domain: animals in Wilhelma-Zoo
+hand crafted policy
+
+17.05.23 - Foundation:
+> create timetable 
+> decide additional service
+> overview about required subparts of our SDS
+> decide which animals to cover
+> create overview with information about animals
+> get started with Git
+
+
+
+24.05.23 - Get started
+
+Implement:
+
+1. NLU:
+> Informable Slots
+> Requestable Slots
+> Function Synonyms
+> Function Slot Synonyms
+
+2. NLG
+
+
+3. Policy
+
+
+4. Basic services
+
+
+5. Other stuff:
+> JSON-File
+
+
+
+07.06.23 - additional service
+
+if necessary, implement what is left from 24.06.23
+
+1. NLU:
+> Informable Slots
+> Requestable Slots
+> Function Synonyms
+> Function Slot Synonyms
+
+2. NLG
+3. Policy
+4. Basic services
+5. Other stuff:
+> JSON-File
+
+
+
+14.06.23 - add additional service
+
+
+21.06.23 - add additional service
+
+
+28.06.23 - final test of system; prepare presentation
+
+
+05.07.23 - buffer week
+
+
+12.07.23: Workshop/presentation
+
+
