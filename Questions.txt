@@ -1,9 +1,11 @@
 Questions:
 
-How exactly should the schedule for visitors (as special service) look like? 
-
 How does mapping work? 
 
 Do we have to inlcude emotions? 
 
-Problems with forking
+How exactly should the additional service/sys act look like? 
+
+
+Does the database have to be created manually? How can I open the file?
+
