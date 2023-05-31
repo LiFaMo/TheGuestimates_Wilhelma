@@ -75,6 +75,36 @@ def load_nlg(backchannel: bool, domain = None):
         nlg = HandcraftedNLG(domain=domain)
     return nlg
 
+def load_superhero_domain():
+    from utils.domain.jsonlookupdomain import JSONLookupDomain
+    from services.nlu.nlu import HandcraftedNLU
+    from services.nlg.nlg import HandcraftedNLG
+    from services.policy import HandcraftedPolicy
+    domain = JSONLookupDomain(name='superhero',
+                                json_ontology_file='resources/ontologies/superhero.json',
+                                sqllite_db_file='resources/databases/superhero.db',
+                                display_name='Superhero Domain')
+    superhero_nlu = HandcraftedNLU(domain=domain)
+    superhero_bst = HandcraftedBST(domain=domain)
+    superhero_policy = HandcraftedPolicy(domain=domain)
+    superhero_nlg = load_nlg(backchannel=False, domain=domain)
+    return domain, [superhero_nlu, superhero_bst, superhero_policy, superhero_nlg]
+
+def load_wilhelma_domain():
+    from utils.domain.jsonlookupdomain import JSONLookupDomain
+    from services.nlu.nlu import HandcraftedNLU
+    from services.nlg.nlg import HandcraftedNLG
+    from services.policy import HandcraftedPolicy
+    domain = JSONLookupDomain(name='wilhelma',
+                                json_ontology_file='resources/ontologies/wilhelma.json',
+                                sqllite_db_file='resources/databases/wilhelma.db',
+                                display_name='Wilhelma Domain')
+    wilhelma_nlu = HandcraftedNLU(domain=domain)
+    wilhelma_bst = HandcraftedBST(domain=domain)
+    wilhelma_policy = HandcraftedPolicy(domain=domain)
+    wilhelma_nlg = load_nlg(backchannel=False, domain=domain)
+    return domain, [wilhelma_nlu, wilhelma_bst, wilhelma_policy, wilhelma_nlg]
+
 def load_weather_domain():
     from examples.webapi.weather import WeatherNLU, WeatherNLG, WeatherDomain
     from services.policy.policy_api import HandcraftedPolicy as PolicyAPI
@@ -126,7 +156,7 @@ def load_qa_domain():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='ADVISER 2.0 Dialog System')
-    parser.add_argument('domains', nargs='+', choices=['lecturers', 'weather', 'mensa', 'qa'],
+    parser.add_argument('domains', nargs='+', choices=['lecturers', 'weather', 'mensa', 'qa', 'superhero', 'wilhelma'],
                         help="Chat domain(s). For multidomain type as list: domain1 domain2 .. \n",
                         default="ImsLecturers")
     parser.add_argument('-g', '--gui', action='store_true', help="Start Webui server")
@@ -190,6 +220,14 @@ if __name__ == "__main__":
         qa_domain, qa_services = load_qa_domain()
         domains.append(qa_domain)
         services.extend(qa_services)
+    if 'superhero' in args.domains:
+        superhero_domain, superhero_services = load_superhero_domain()
+        domains.append(superhero_domain)
+        services.extend(superhero_services)
+    if 'wilhelma' in args.domains:
+        wilhelma_domain, wilhelma_services = load_wilhelma_domain()
+        domains.append(wilhelma_domain)
+        services.extend(wilhelma_services)
 
     # load HCI interfaces
     if args.gui:
