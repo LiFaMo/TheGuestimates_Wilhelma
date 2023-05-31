@@ -1,11 +1,13 @@
 Questions:
 
-How does mapping work? 
 
-Do we have to inlcude emotions? 
+How does mapping work? -> database
+
+Do we have to inlcude emotions? -> no necessarily 
 
 How exactly should the additional service/sys act look like? 
 
-
 Does the database have to be created manually? How can I open the file?
+
+Is the date 02.08. fixed? (For planning other stuff) 
 
