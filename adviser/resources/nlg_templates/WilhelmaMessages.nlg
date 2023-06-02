@@ -51,7 +51,6 @@ template inform_byname(name)
 	special_case name = "none"
 		"I’m sorry, I could not find this animal."
 
-
 template inform_alternatives(name)
 	"There is another animal called {name}. What do you want to know about it?"
 

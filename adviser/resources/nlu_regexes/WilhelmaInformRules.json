@@ -20,8 +20,8 @@
         "asian lion": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\basian lion\\b)|(asian lion(s)?|lion(s)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\basian lion\\b)|(asian lion(s)?|lion(s)?))( (please|and))*)",
         "asian elefant": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\basian elefant\\b)|(asian elefant(s)?|asian elephant(s)?|elefant(s)?|elephant(s)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\basian elefant\\b)|(asian elefant(s)?|asian elephant(s)?|elefant(s)?|elephant(s)?))( (please|and))*)",
         "african penguin": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bafrican penguin\\b)|(african penguin(s)?|penguin(s)?|cape penguin(s)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bafrican penguin\\b)|(african penguin(s)?|penguin(s)?|cape penguin(s)?))( (please|and))*)",
-        "western lowland gorilla": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bwestern lowland gorilla\\b)|(western lowland gorilla(s)?|gorilla(s)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bwestern lowland gorilla\\b)|(western lowland gorilla(s)?|gorilla(s)?))( (please|and))*)",
-    }
+        "western lowland gorilla": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bwestern lowland gorilla\\b)|(western lowland gorilla(s)?|gorilla(s)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bwestern lowland gorilla\\b)|(western lowland gorilla(s)?|gorilla(s)?))( (please|and))*)"
+    },
     "latin_name": {
         "tamandua tetradactyla straminea": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\btamandua tetradactyla straminea\\b)|(tamandua|tetradactyla|straminea))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\btamandua tetradactyla straminea\\b)|(tamandua|tetradactyla|straminea))( (please|and))*)",
         "choloepus didactylus": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bcholoepus didactylus\\b)|(choloepus|didactylus))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bcholoepus didactylus\\b)|(choloepus|didactylus))( (please|and))*)",
@@ -43,7 +43,7 @@
         "panthera leo persica": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bpanthera leo persica\\b)|(panthera|leo|persica))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bpanthera leo persica\\b)|(panthera|leo|persica))( (please|and))*)",
         "elephas maximus": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\belephas maximus\\b)|(elephas|maximus))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\belephas maximus\\b)|(elephas|maximus))( (please|and))*)",
         "spheniscus demersus": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bspheniscus demersus\\b)|(spheniscus|demersus))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bspheniscus demersus\\b)|(spheniscus|demersus))( (please|and))*)",
-        "gorilla gorilla gorilla": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bgorilla gorilla gorilla\\b)|(gorilla))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bgorilla gorilla gorilla\\b)|(gorilla))( (please|and))*)",
+        "gorilla gorilla gorilla": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bgorilla gorilla gorilla\\b)|(gorilla))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bgorilla gorilla gorilla\\b)|(gorilla))( (please|and))*)"
     },
 	"primary_fur_color": {
         "black": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bblack\\b)|(black|dark|blackish))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bblack\\b)|(black|dark|blackish))( (please|and))*)",
@@ -56,7 +56,7 @@
         "black and white": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bblack (and)? white\\b)|(black and white|black-white|black white))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bblack (and)? white\\b)|(black and white|black-white|black white))( (please|and))*)",
         "dark brown": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bdark brown\\b)|(dark brown|chocolate))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bdark brown\\b)|(dark brown|chocolate))( (please|and))*)",
         "white": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bwhite\\b)|(white|colo(u)?rless|milky))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bwhite\\b)|(white|colo(u)?rless|milky))( (please|and))*)",
-        "fawn": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bfawn\\b)|(fawn|beige))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bfawn\\b)|(fawn|beige))( (please|and))*)",
+        "fawn": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bfawn\\b)|(fawn|beige))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bfawn\\b)|(fawn|beige))( (please|and))*)"
 	},
 	"weight": {
         "angeles mastretta": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bangeles mastretta\\b)|(mastretta)|(\\bangeles mastretta\\b)|(mastretta)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bangeles mastretta\\b)|(mastretta)( (please|and))*)",
@@ -96,7 +96,7 @@
         "africa": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bafrica(n)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bafrica(n)?\\b)( (please|and))*)",
         "asia": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\basia(n)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\basia(n)?\\b)( (please|and))*)",
         "australia": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\baustralia(n)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\baustralia(n)?\\b)( (please|and))*)",
-        "europe": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\beurope(an)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\beurope(an)?\\b)( (please|and))*)",
+        "europe": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\beurope(an)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\beurope(an)?\\b)( (please|and))*)"
     },
 	"habitat": {
         "tropical forest": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\btropic(al)? forest(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\btropic(al)? forest(s)?\\b)( (please|and))*)",
@@ -126,7 +126,7 @@
         "acacia forests": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bacacia (forest(s)?)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bacacia (forest(s)?)?\\b)( (please|and))*)",
         "grass landscape": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bgrass landscape(s)?\\b|\\bgrassland(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bgrass landscape(s)?\\b|\\bgrassland(s)?\\b)( (please|and))*)",
         "coast": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bcoast(s)?\\b|\\bcoastline(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bcoast(s)?\\b|\\bcoastline(s)?\\b)( (please|and))*)",
-        "mountain forest": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b(mountain|rocky) forest(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b(mountain|rocky) forest(s)?\\b)( (please|and))*)",
+        "mountain forest": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b(mountain|rocky) forest(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b(mountain|rocky) forest(s)?\\b)( (please|and))*)"
     },
 	"expected_age": {
         "9 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b9 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b9 y(ears)?\\b)( (please|and))*)",
@@ -145,7 +145,7 @@
         "49 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b49 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b49 y(ears)?\\b)( (please|and))*)",
         "18 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b18 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b18 y(ears)?\\b)( (please|and))*)",
         "20 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b20 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b20 y(ears)?\\b)( (please|and))*)",
-        "35 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b35 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b35 y(ears)?\\b)( (please|and))*)",
+        "35 years": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b35 y(ears)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b35 y(ears)?\\b)( (please|and))*)"
     },
 	"gestation_period": {
         "angeles mastretta": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bangeles mastretta\\b)|(mastretta)|(\\bangeles mastretta\\b)|(mastretta)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bangeles mastretta\\b)|(mastretta)( (please|and))*)",
@@ -189,7 +189,7 @@
         "500": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b500\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b500\\b)( (please|and))*)",
         "20,000": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b20,000\\b)|(20000|20,000|20.000))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b20,000\\b)|(20000|20,000|20.000))( (please|and))*)",
         "30,000": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b30,000\\b)|(30000|30,000|30.000))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b30,000\\b)|(30000|30,000|30.000))( (please|and))*)",
-        "90,000": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b90,000\\b)|(90000|90,000|90.000))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b90,000\\b)|(90000|90,000|90.000))( (please|and))*)",
+        "90,000": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b90,000\\b)|(90000|90,000|90.000))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b90,000\\b)|(90000|90,000|90.000))( (please|and))*)"
     },
 	"degree_of_endangering": {
         "not endangered": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bnot endangered\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bnot endangered\\b)( (please|and))*)",
@@ -198,7 +198,7 @@
         "strongly endangered": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bstrongly endangered\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bstrongly endangered\\b)( (please|and))*)",
         "stable": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bstable\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bstable\\b)( (please|and))*)",
         "critically endangered": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bcritically endangered\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bcritically endangered\\b)( (please|and))*)",
-        "endangered by extinction": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bendangered by extinction\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bendangered by extinction\\b)( (please|and))*)",
+        "endangered by extinction": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bendangered by extinction\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bendangered by extinction\\b)( (please|and))*)"
     },
 	"social_structure": {
         "as loner": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bloner\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bloner\\b)( (please|and))*)",
@@ -211,7 +211,7 @@
         "in small groups": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bsmall groups\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bsmall groups\\b)( (please|and))*)",
         "in large groups": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\blarge groups\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\blarge groups\\b)( (please|and))*)",
         "in families": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bfamilies\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bfamilies\\b)( (please|and))*)",
-        "in harems": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bharem(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bharem(s)?\\b)( (please|and))*)",
+        "in harems": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bharem(s)?\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bharem(s)?\\b)( (please|and))*)"
     },
 	"specialities": {
         "angeles mastretta": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bangeles mastretta\\b)|(mastretta)|(\\bangeles mastretta\\b)|(mastretta)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bangeles mastretta\\b)|(mastretta)( (please|and))*)",
@@ -252,7 +252,7 @@
         "great ape house": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\b(great)? ape house\\b)( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\b(great)? ape house\\b)( (please|and))*)",
         "moorish garden and moorish country house": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bmoorish garden and moorish country house\\b|((moorish)? (garden|country house)))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bmoorish garden and moorish country house\\b|((moorish)? (garden|country house)))( (please|and))*)",
         "historic greenhouse row": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bhistoric greenhouse row\\b|((historic)? greenhouse (row)?))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bhistoric greenhouse row\\b|((historic)? greenhouse (row)?))( (please|and))*)",
-        "world of birds": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bworld of birds\\b|(birds))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bworld of birds\\b|(birds))( (please|and))*)",
+        "world of birds": "((\\\\b|^| )(what about|want|have|need|looking for|used for)( a(n)?)* (\\bworld of birds\\b|(birds))( ((would|seems to) be (good|nice)($|[^\\?]$)|seems (good|nice)($|[^\\?]$)))|( |^)(\\bworld of birds\\b|(birds))( (please|and))*)"
 },
     "domain_active": {
         "true": "(\\b|^| )(I want a (lecturer|teacher))"
