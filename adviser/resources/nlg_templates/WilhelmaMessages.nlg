@@ -33,11 +33,11 @@ function info(slot, value, name)
 	if slot = "habitat": "lives in \{value}\""
 	if slot = "expected_age": "lives up to \"{value}\""
 	if slot = "gestation_period": "is pregnant for \"{value}\""
-	if slot = "estimated_population": "there are only \"{value}\"" living on earth nowadays
+	if slot = "estimated_population": "there are only \"{value}\" living on earth nowadays"
 	if slot = "degree_of_endangering": "the animal is \"{value}\""
 	if slot = "social_structure": "lives \"{value}\""
     if slot = "specialities": "\"{value}\""
-    if slot = "location_Wilhelma": "belongs to \"{value}\"" in the Wilhelma
+    if slot = "location_Wilhelma": "belongs to \"{value}\" in the Wilhelma"
     if slot = "opening_hours": "\"{value}\""
     if slot = "sponsorship": "a sponsorship costs \"{value}\""
     if slot = "feeding_time": "is fed \"{value}\""
@@ -92,7 +92,7 @@ template reqmore()
 
 template reqmore(latin_name)
 	if latin_name = "dontcare"
-		"Would you like me to look for an animal with any latin name"   #das macht nicht so viel Sinn
+		"Would you like me to look for an animal with any latin name"  
 template reqmore(primary_fur_color)
 	if primary_fur_color = "dontcare"
 		"Would you like me to look for an animal with any color?"
@@ -124,7 +124,7 @@ template reqmore(specialities)
     if specialities = "dontcare"
         "Would you like me to look for an animal with any specialities?"
 template reqmore(location_Wilhelma)
-    if location_Wilhelma = "dontcare"           #bessere Bezeichnung statt "location"?
+    if location_Wilhelma = "dontcare"           
         "Would you like me to look for an animal belonging to any location in the Wilhelma?"
 
 # ---------------------------System Select----------------------------------#
