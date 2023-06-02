@@ -204,6 +204,8 @@ function synonyms(slot, value)
 			"devilfish"
 			"cephalopod"
 			"mollusk"
+		if value = "cheetah"
+			"cheetah(s)?"
         if value = "grevy zebra"  
             "zebra(s)?"
         if value = "okapi"  
