@@ -81,11 +81,6 @@ rule inform(location_Wilhelma)
     "{synonyms("location_Wilhelma", location_Wilhelma)}{WBG()}"
     "(\\ |^){synonyms("location_Wilhelma", location_Wilhelma)}(\\ (please|and))*"	
 
-rule inform(opening_hours)
-    "{rINFORM()} {synonyms("opening_hours", opening_hours)}"
-    "{synonyms("opening_hours", opening_hours)}{WBG()}"
-    "(\\ |^){synonyms("opening_hours", opening_hours)}(\\ (please|and))*"	
-
 rule inform(sponsorship)
     "{rINFORM()} {synonyms("sponsorship", sponsorship)}"
     "{synonyms("sponsorship", sponsorship)}{WBG()}"
