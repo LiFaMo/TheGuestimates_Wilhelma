@@ -235,19 +235,6 @@
 			"Historic Greenhouse Row",
 			"World of Birds"
 		],
-		"opening_hours": [
-			"Main Entrance: November to February: 8:15 - 16:30",
-			"Main Entrance: March and October: 8:15 - 18:30",
-			"Main Entrance: April and September: 8:15 - 19:30",
-			"Main Entrance: May to August: 8:15 - 20:00",
-			"Entrance Rosensteinpark: November to February: 9:15 - 15:30",
-			"Entrance Rosensteinpark: March to October: 9:00 - 16:30",
-			"Animal and Plant Houses: January and February: 9:00 - 16:00",
-			"Animal and Plant Houses: March and October: 9:00 - 17:30",
-			"Animal and Plant Houses: April, August, and September: 9:00 - 18:00",
-			"Animal and Plant Houses: May to July: 9:00 - 18:30",
-			"Animal and Plant Houses: November and December: 9:00 - 15:45"
-		],
 		"sponsorship": [
 			"100 €",
 			"150 €",
@@ -284,7 +271,6 @@
 		"degree_of_endangering",
 		"social_structure",
 		"location_Wilhelma",
-		"opening_hours",
 		"feeding_time",
 		"sponsorship"
     ],
