@@ -9,17 +9,17 @@ template closingmsg() : "Thank you, goodbye."
 # System Requests
 
 template request(latin_name): "What should the animal's latin name be?"
-template request(primary_fur_color): "What should be the primary color of the animal?"
-template request(weight): "What should be the weight of the animal?"
-template request(continent_of_origin): "What should be the animal's continent of origin?"
-template request(habitat): "What should be the animal's habitat?"
-template request(expected_age): "What should be the expected age of the animal?"
-template request(gestation_period): "What should be the gestation period of the animal?"
-template request(estimated_population): "What should be the estimated population of the animal?"
-template request(degree_of_endangering): "What should be the degree of endangering of the animal?"
-template request(social_structure): "What should be the social structure of the animal?"
-template request(specialities): "What should be the animal's specialities?"
-template request(location_Wilhelma): "What should be the animal's location in the Wilhelma?"
+template request(primary_fur_color): "What should the primary color of the animal be?"
+template request(weight): "What should the weight of the animal be?"
+template request(continent_of_origin): "What should the animal's continent of origin be?"
+template request(habitat): "What should the animal's habitat be?"
+template request(expected_age): "What should the expected age of the animal be?"
+template request(gestation_period): "What should the gestation period of the animal be?"
+template request(estimated_population): "What should the estimated population of the animal be?"
+template request(degree_of_endangering): "What should the degree of endangering of the animal be?"
+template request(social_structure): "What should the social structure of the animal be?"
+template request(specialities): "What should the animal's specialities be?"
+template request(location_Wilhelma): "What should the animal's location in the Wilhelma be?"
 
 
 # Rules for System Inform
