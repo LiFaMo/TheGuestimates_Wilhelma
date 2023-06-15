@@ -8,39 +8,39 @@ template closingmsg() : "Thank you, goodbye."
 
 # System Requests
 
-template request(latin_name): "What should the animal's latin name be?"
 template request(primary_fur_color): "What should the primary color of the animal be?"
-template request(weight): "What should the weight of the animal be?"
 template request(continent_of_origin): "What should the animal's continent of origin be?"
 template request(habitat): "What should the animal's habitat be?"
-template request(expected_age): "What should the expected age of the animal be?"
-template request(gestation_period): "What should the gestation period of the animal be?"
-template request(estimated_population): "What should the estimated population of the animal be?"
 template request(degree_of_endangering): "What should the degree of endangering of the animal be?"
 template request(social_structure): "What should the social structure of the animal be?"
-template request(specialities): "What should the animal's specialities be?"
 template request(location_Wilhelma): "What should the animal's location in the Wilhelma be?"
-
 
 # Rules for System Inform
 
 function info(slot, value, name)
-	if slot = "name": "is called: \"{value}\""
-	if slot = "latin_name": "it's latin name is: \"{value}\""
-	if slot = "primary_fur_color": "it is mainly \"{value}\""
-	if slot = "weight": "weighs \"{value}\""
-	if slot = "continent_of_origin": "comes from \"{value}\""
-	if slot = "habitat": "lives in \{value}\""
-	if slot = "expected_age": "lives up to \"{value}\""
-	if slot = "gestation_period": "is pregnant for \"{value}\""
-	if slot = "estimated_population": "there are only \"{value}\" living on earth nowadays"
-	if slot = "degree_of_endangering": "the animal is \"{value}\""
-	if slot = "social_structure": "lives \"{value}\""
-    if slot = "specialities": "\"{value}\""
+	if slot = "name": "is called: {value}"
+	if slot = "latin_name": "latin name is: \"{value}\""
+	if slot = "primary_fur_color": "is mainly {value}"
+	if slot = "weight": "weighs {value}"
+	if slot = "continent_of_origin": "comes from {value}"
+	if slot = "habitat": "lives in {value}"
+	if slot = "expected_age": "lives up to {value}"
+	if slot = "gestation_period": "is pregnant for around {value}"
+	if slot = "estimated_population": "there are only {value} {name}s living on earth nowadays"
+	if slot = "degree_of_endangering":
+	    if value = "not endangered":            "is luckily not endangered nowadays"
+	    if value = "stable":                    "is luckily stable nowadays"
+	    if value = "critically endangered":     "is unfortunately critically endangered"
+	    if value = "strongly endangered":       "is unfortunately  strongly endangered"
+	    if value = "endangered":                "is unfortunately  endangered"
+	    if value = "potentially endangered":    "is potentially endangered"
+	    if value = "endangered by extinction":  "is unfortunately almost extinct and has to be protected"
+	if slot = "social_structure": "lives {value}"
+    if slot = "specialities": "{value}"
     if slot = "location_Wilhelma": "belongs to \"{value}\" in the Wilhelma"
-    if slot = "opening_hours": "\"{value}\""
-    if slot = "sponsorship": "a sponsorship costs \"{value}\""
-    if slot = "feeding_time": "is fed \"{value}\""
+    if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
+    if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
+    if slot = "feeding_time": "is fed {value}"
 
 
 # -------------------------Only Name Slot-----------------------------------#
@@ -62,13 +62,16 @@ template inform_alternatives(name)
 #------------------------ Name Slot + Slots----------------------------------#
 
 template inform_byname(name, *slots)
-	"The animal called {name} {for_entry(slots, "info", ", they ", " and they ", name)}."
+	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
 
+	special_case name = "Wilhelma"
+	    "The opening hours for the wilhelma are {for_entry(slots)}."
+
 template inform_alternatives(name, *slots)
-	"The animal {name} also {for_entry(slots, "info", ", they ", " and they ", name)}."
+	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
@@ -90,39 +93,21 @@ template confirm(*slots)
 template reqmore()
 	"Can I help you with anything else?"
 
-template reqmore(latin_name)
-	if latin_name = "dontcare"
-		"Would you like me to look for an animal with any latin name"  
 template reqmore(primary_fur_color)
 	if primary_fur_color = "dontcare"
 		"Would you like me to look for an animal with any color?"
-template reqmore(weight)
-	if weight = "dontcare"
-		"Would you like me to look for an animal with any weight?"
 template reqmore(continent_of_origin)
     if continent_of_origin = "dontcare"
         "Would you like me to look for an animal coming from any continent?"
 template reqmore(habitat)
     if habitat = "dontcare"
         "Would you like me to look for an animal living in any habitat?"
-template reqmore(expected_age)
-    if expected_age = "dontcare"
-        "Would you like me to look for an animal reaching any age?"
-template reqmore(gestation_period)
-    if gestation_period = "dontcare"
-        "Would you like me to look for an animal with any gestation_period"
-template reqmore(estimated_population)
-    if estimated_population = "dontcare"
-        "Would you like me to look for an animal with any estimated population?"
 template reqmore(degree_of_endangering)
     if degree_of_endangering = "dontcare"
         "Would you like me to look for an animal with any degree of endangering?"
 template reqmore(social_structure)
     if social_structure = "dontcare"
         "Would you like me to look for an animal living in any social structure?"
-template reqmore(specialities)
-    if specialities = "dontcare"
-        "Would you like me to look for an animal with any specialities?"
 template reqmore(location_Wilhelma)
     if location_Wilhelma = "dontcare"           
         "Would you like me to look for an animal belonging to any location in the Wilhelma?"
