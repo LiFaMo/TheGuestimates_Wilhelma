@@ -65,6 +65,13 @@ rule request(latin_name)
     "{WANT()}.*{slot_synonyms("latin_name")}"
     "(the )?{slot_synonyms("latin_name")}"
 
+rule request(main_food)
+    "{rREQUEST()} {slot_synonyms("main_food")}"
+    "(?<!{DONTCAREWHAT()})(?<!want ){IT()} {slot_synonyms("main_food")}"
+    "(?<!{DONTCARE()}){WHAT()} {slot_synonyms("main_food")}"
+    "{WANT()}.*{slot_synonyms("main_food")}"
+    "(the )?{slot_synonyms("main_food")}"
+
 rule request(weight)
     "{rREQUEST()} {slot_synonyms("weight")}"
     "(?<!{DONTCAREWHAT()})(?<!want ){IT()} {slot_synonyms("weight")}"
