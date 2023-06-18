@@ -129,6 +129,7 @@
     "requestable": [
 		"name",
 		"latin_name",
+		"main_food",
 		"weight",
 		"expected_age",
 		"gestation_period",
