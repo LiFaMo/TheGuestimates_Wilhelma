@@ -1,6 +1,6 @@
 # ---------------NEW RULES - SUPERHERO MESSAGES-------------------------
 
-template welcomemsg(): "Welcome to the Wilhelma Support (WS)  chat bot. How may I help you?"
+template welcomemsg(): "Welcome to the Wilhelma Support (WS) chat bot. How may I help you?"
 template welcomemsg(help): "Sorry, I cannot understand you. Please tell me again what you are looking for."
 template welcomemsg(more) : "Can I help you with anything else?"
 template bad() : "Sorry I am a bit confused; please tell me again what you are looking for."
@@ -8,7 +8,7 @@ template closingmsg() : "Thank you, goodbye."
 
 # System Requests
 
-template request(primary_fur_color): "What should the primary color of the animal be?"
+template request(primary_fur_color): "What should the primary fur color of the animal be?"
 template request(continent_of_origin): "What should the animal's continent of origin be?"
 template request(habitat): "What should the animal's habitat be?"
 template request(degree_of_endangering): "What should the degree of endangering of the animal be?"
@@ -26,21 +26,24 @@ function info(slot, value, name)
 	if slot = "habitat": "lives in {value}"
 	if slot = "expected_age": "lives up to {value}"
 	if slot = "gestation_period": "is pregnant for around {value}"
-	if slot = "estimated_population": "there are only {value} {name}s living on earth nowadays"
+	if slot = "estimated_population": "has an estimated population of around {value} living on earth nowadays"
+	    if value = "None": "does not have a clear information on its estimated population"
 	if slot = "degree_of_endangering":
 	    if value = "not endangered":            "is luckily not endangered nowadays"
 	    if value = "stable":                    "is luckily stable nowadays"
 	    if value = "critically endangered":     "is unfortunately critically endangered"
-	    if value = "strongly endangered":       "is unfortunately  strongly endangered"
-	    if value = "endangered":                "is unfortunately  endangered"
+	    if value = "strongly endangered":       "is unfortunately strongly endangered"
+	    if value = "endangered":                "is unfortunately endangered"
 	    if value = "potentially endangered":    "is potentially endangered"
 	    if value = "endangered by extinction":  "is unfortunately almost extinct and has to be protected"
 	if slot = "social_structure": "lives {value}"
     if slot = "specialities": "{value}"
+        if value = "None": "has no recorded speciality"
     if slot = "location_Wilhelma": "belongs to \"{value}\" in the Wilhelma"
     if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
     if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
     if slot = "feeding_time": "is fed {value}"
+        if value = "None": "is unfortunately not fed publicly"
 
 
 # -------------------------Only Name Slot-----------------------------------#
@@ -66,9 +69,6 @@ template inform_byname(name, *slots)
 
 	special_case name = "none"
 		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
-
-	special_case name = "Wilhelma"
-	    "The opening hours for the wilhelma are {for_entry(slots)}."
 
 template inform_alternatives(name, *slots)
 	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
