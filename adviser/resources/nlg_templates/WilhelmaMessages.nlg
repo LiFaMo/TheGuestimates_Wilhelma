@@ -20,6 +20,7 @@ template request(location_Wilhelma): "What should the animal's location in the W
 function info(slot, value, name)
 	if slot = "name": "is called: {value}"
 	if slot = "latin_name": "latin name is: \"{value}\""
+	if slot = "main_food": "mainly eats {value}"
 	if slot = "primary_fur_color": "is mainly {value}"
 	if slot = "weight": "weighs {value}"
 	if slot = "continent_of_origin": "comes from {value}"
@@ -39,7 +40,7 @@ function info(slot, value, name)
 	if slot = "social_structure": "lives {value}"
     if slot = "specialities": "{value}"
         if value = "None": "has no recorded speciality"
-    if slot = "location_Wilhelma": "belongs to \"{value}\" in the Wilhelma"
+    if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
     if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
     if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
     if slot = "feeding_time": "is fed {value}"
