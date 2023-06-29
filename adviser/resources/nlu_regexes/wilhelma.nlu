@@ -172,6 +172,13 @@ rule request(sponsorship)
     "{WANT()}.*{slot_synonyms("sponsorship")}"
     "(the )?{slot_synonyms("sponsorship")}"
     "who .*{slot_synonyms("sponsorship")}"
+
+rule request(opening_hours)
+    "{rREQUEST()} {slot_synonyms("opening_hours")}"
+    "(?<!{DONTCAREWHAT()})(?<!want ){IT()} {slot_synonyms("opening_hours")}"
+    "(?<!{DONTCARE()}){WHAT()} {slot_synonyms("opening_hours")}"
+    "{WANT()}.*{slot_synonyms("opening_hours")}"
+    "(the )?{slot_synonyms("opening_hours")}"   
 # synonyms
 
 function synonyms(slot, value)

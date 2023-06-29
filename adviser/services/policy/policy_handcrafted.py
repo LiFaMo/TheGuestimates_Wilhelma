@@ -147,6 +147,9 @@ class HandcraftedPolicy(Service):
                 self.dialog_start()
             self.first_turn = False
         # handle domain specific actions
+        elif "opening_hours" in beliefstate["requests"]:
+            print("HERE")
+
         else:
             sys_act, sys_state = self._next_action(beliefstate)
         if self.logger:
