@@ -1,0 +1,130 @@
+# ---------------NEW RULES - SUPERHERO MESSAGES-------------------------
+
+template welcomemsg(): "Welcome to the Wilhelma Support (WS) chat bot. How may I help you?"
+template welcomemsg(help): "Sorry, I cannot understand you. Please tell me again what you are looking for."
+template welcomemsg(more) : "Can I help you with anything else?"
+template bad() : "Sorry I am a bit confused; please tell me again what you are looking for."
+template closingmsg() : "Thank you, goodbye."
+
+template opening(): "The opening hours of the Wilhelma are as follows: Main Entrance: November to February: 8:15 - 16:30, Main Entrance: March and October: 8:15 - 18:30, Main Entrance: April and September: 8:15 - 19:30, Main Entrance: May to August: 8:15 - 20:00, Entrance Rosensteinpark: November to February: 9:15 - 15:30, Entrance Rosensteinpark: March to October: 9:00 - 16:30, Animal and Plant Houses: January and February: 9:00 - 16:00, Animal and Plant Houses: March and October: 9:00 - 17:30, Animal and Plant Houses: April, August, and September: 9:00 - 18:00, Animal and Plant Houses: May to July: 9:00 - 18:30, Animal and Plant Houses: November and December: 9:00 - 15:45"
+
+# System Requests
+
+template request(primary_fur_color): "What should the primary fur color of the animal be?"
+template request(continent_of_origin): "What should the animal's continent of origin be?"
+template request(habitat): "What should the animal's habitat be?"
+template request(degree_of_endangering): "What should the degree of endangering of the animal be?"
+template request(social_structure): "What should the social structure of the animal be?"
+template request(location_Wilhelma): "What should the animal's location in the Wilhelma be?"
+
+template request(visiting_path): "Which three animals would you like to visit?"
+
+# Rules for System Inform
+
+function info(slot, value, name)
+	if slot = "name": "is called: {value}"
+	if slot = "latin_name": "latin name is: \"{value}\""
+	if slot = "main_food": "mainly eats {value}"
+	if slot = "primary_fur_color": "is mainly {value}"
+	if slot = "weight": "weighs {value}"
+	if slot = "continent_of_origin": "comes from {value}"
+	if slot = "habitat": "lives in {value}"
+	if slot = "expected_age": "lives up to {value}"
+	if slot = "gestation_period": "is pregnant for around {value}"
+	if slot = "estimated_population": "has an estimated population of around {value} living on earth nowadays"
+	    if value = "None": "does not have a clear information on its estimated population"
+	if slot = "degree_of_endangering"
+	    if value = "not endangered":            "is luckily not endangered nowadays"
+	    if value = "stable":                    "is luckily stable nowadays"
+	    if value = "critically endangered":     "is unfortunately critically endangered"
+	    if value = "strongly endangered":       "is unfortunately strongly endangered"
+	    if value = "endangered":                "is unfortunately endangered"
+	    if value = "potentially endangered":    "is potentially endangered"
+	    if value = "endangered by extinction":  "is unfortunately almost extinct and has to be protected"
+	if slot = "social_structure": "lives {value}"
+    if slot = "specialities": "{value}"
+        if value = "None": "has no recorded speciality"
+    if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
+    if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
+    if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
+    if slot = "feeding_time": "is fed {value}"
+        if value = "None": "is unfortunately not fed publicly"
+
+
+# -------------------------Only Name Slot-----------------------------------#
+
+template inform_byname(name)
+	"There is an animal called {name}. What do you want to know about it?"
+
+	special_case name = "none"
+		"I’m sorry, I could not find this animal."
+
+
+template inform_alternatives(name)
+	"There is another animal called {name}. What do you want to know about it?"
+
+	special_case name = "none"
+		"I'm sorry, I couldn't find another animal."
+
+
+#------------------------ Name Slot + Slots----------------------------------#
+
+template inform_byname(name, *slots)
+	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+
+	special_case name = "none"
+		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
+
+template inform_alternatives(name, *slots)
+	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
+
+	special_case name = "none"
+		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
+
+
+# ----------------------------System Confirm----------------------------------#
+
+template confirm()
+	"Please tell me more about the animal you are looking for."
+template confirm(name, *slots)
+	if name = "none"
+		"Let me confirm, you are looking for an animal that {for_entry(slots, "info", ", ", " and ", name)}, right?"
+template confirm(*slots)
+	"Let me confirm, you are looking for an animal that {for_entry(slots, "info", ", ", " and ", "none")}, right?"
+
+
+# ---------------------------System RequestMore------------------------------#
+
+template reqmore()
+	"Can I help you with anything else?"
+
+template reqmore(primary_fur_color)
+	if primary_fur_color = "dontcare"
+		"Would you like me to look for an animal with any color?"
+template reqmore(continent_of_origin)
+    if continent_of_origin = "dontcare"
+        "Would you like me to look for an animal coming from any continent?"
+template reqmore(habitat)
+    if habitat = "dontcare"
+        "Would you like me to look for an animal living in any habitat?"
+template reqmore(degree_of_endangering)
+    if degree_of_endangering = "dontcare"
+        "Would you like me to look for an animal with any degree of endangering?"
+template reqmore(social_structure)
+    if social_structure = "dontcare"
+        "Would you like me to look for an animal living in any social structure?"
+template reqmore(location_Wilhelma)
+    if location_Wilhelma = "dontcare"           
+        "Would you like me to look for an animal belonging to any location in the Wilhelma?"
+
+# ---------------------------System Select----------------------------------#
+
+template select(*slot)
+	"Sorry, would you like to have an animal {for_entry(slot, "info_or_dontcare_list", "", "")}?"
+
+function info_or_dontcare_list(slot, value_list)
+	"{for(value_list, "info_or_dontcare", ", ", " or ", slot)}"
+
+function info_or_dontcare(value, slot)
+	"which {info(slot, value, "none")}"
+	special_case value = "dontcare": "you don't care"
