@@ -5,7 +5,6 @@ template welcomemsg(help): "Sorry, I cannot understand you. Please tell me again
 template welcomemsg(more) : "Can I help you with anything else?"
 template bad() : "Sorry I am a bit confused; please tell me again what you are looking for."
 template closingmsg() : "Thank you, goodbye."
-
 template opening(): "The opening hours of the Wilhelma are as follows: Main Entrance: November to February: 8:15 - 16:30, Main Entrance: March and October: 8:15 - 18:30, Main Entrance: April and September: 8:15 - 19:30, Main Entrance: May to August: 8:15 - 20:00, Entrance Rosensteinpark: November to February: 9:15 - 15:30, Entrance Rosensteinpark: March to October: 9:00 - 16:30, Animal and Plant Houses: January and February: 9:00 - 16:00, Animal and Plant Houses: March and October: 9:00 - 17:30, Animal and Plant Houses: April, August, and September: 9:00 - 18:00, Animal and Plant Houses: May to July: 9:00 - 18:30, Animal and Plant Houses: November and December: 9:00 - 15:45"
 
 # System Requests
@@ -27,6 +26,7 @@ function info(slot, value, name)
 	if slot = "main_food": "mainly eats {value}"
 	if slot = "primary_fur_color": "is mainly {value}"
 	if slot = "weight": "weighs {value}"
+	    if value = "unknown": "does not have a clearly specified weight"
 	if slot = "continent_of_origin": "comes from {value}"
 	if slot = "habitat": "lives in {value}"
 	if slot = "expected_age": "lives up to {value}"
@@ -46,7 +46,8 @@ function info(slot, value, name)
         if value = "None": "has no recorded speciality"
     if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
     if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
-    if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
+    if slot = "sponsorship": "can be sponsored with {value} € over one to five years - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
+        if value = "None": "does not have a specified amount of sponsoring"
     if slot = "feeding_time": "is fed {value}"
         if value = "None": "is unfortunately not fed publicly"
 

@@ -7,5 +7,5 @@
     "repeat": "(\\b|^| )(repeat( that| it)?|say( that | it) again|(again))",
     "reqalts": "(\\b|^| )((something|anything) else)|(different( one)*)|(another one)|(alternatives*)|(other options*)|((don'*t|do not) (want|like) (that|this)( one)*)",
     "dontcare": "(anything(?! else)|((any$|any kind)|(i )*(don'?t|do not) (care|know|mind))($|(?! (a?bout|of|what))|( (a?bout|of|what) (type|kind)(?! of))| a?bout (that|this))|(any(thing)? (is )*(fine|ok\\b|okay|will do))($| and| but)|(it )?(doesn'?t|does not) matter)+",
-    "req_everything": "(\\b|^| )(((say|tell( me)?)|(want|need) to know)( everything)? about)"
+    "req_everything": "(((say|tell( me)?)|(want|need) to know)( everything)? about)"
 }
