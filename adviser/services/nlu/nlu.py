@@ -248,6 +248,7 @@ class HandcraftedNLU(Service):
                 elif user_act_type == 'req_everything':
                     self.req_everything = True
 
+
                 else:
                     # This section covers all general user acts that do not depend on
                     # the dialog history

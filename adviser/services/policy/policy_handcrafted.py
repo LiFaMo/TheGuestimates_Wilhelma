@@ -146,9 +146,13 @@ class HandcraftedPolicy(Service):
             if UserActionType.SelectDomain in beliefstate["user_acts"]:
                 self.dialog_start()
             self.first_turn = False
+
         # handle domain specific actions
         elif "opening_hours" in beliefstate["requests"]:
-            print("HERE")
+            sys_act = SysAct()
+            sys_act.type = SysActionType.OpeningHours
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
 
         else:
             sys_act, sys_state = self._next_action(beliefstate)
