@@ -180,6 +180,13 @@ rule request(opening_hours)
     "(?<!{DONTCARE()}){WHAT()} {slot_synonyms("opening_hours")}"
     "{WANT()}.*{slot_synonyms("opening_hours")}"
     "(the )?{slot_synonyms("opening_hours")}"
+
+rule request(visiting_path)
+    "{rREQUEST()} {slot_synonyms("visiting_path")}"
+    "(?<!{DONTCAREWHAT()})(?<!want ){IT()} {slot_synonyms("visiting_path")}"
+    "(?<!{DONTCARE()}){WHAT()} {slot_synonyms("visiting_path")}"
+    "{WANT()}.*{slot_synonyms("visiting_path")}"
+    "(the )?{slot_synonyms("visiting_path")}"
 # synonyms
 
 function synonyms(slot, value)
@@ -524,6 +531,8 @@ function slot_synonyms(slot)
         "{domain_vocab()}('s)? (amount of|money for)? sponsor(ship|ing)"
         "(amount of|money for)? sponsor(ship|ing) of the {domain_vocab()}"
 
+    if slot = "visiting_path"
+        "(visit|see) (the)? {domain_vocab()}"
 # constants
 
 function domain_vocab(): "(animal|mammal)"
