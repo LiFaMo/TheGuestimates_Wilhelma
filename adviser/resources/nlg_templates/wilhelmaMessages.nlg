@@ -1,12 +1,13 @@
 # ---------------NEW RULES - SUPERHERO MESSAGES-------------------------
 
-template welcomemsg(): "Welcome to the Wilhelma Support (WS) chat bot. How may I help you?"
+template welcomemsg(): "Welcome to Automated Smart Knowledge (ASK) about the Wilhelma. How may I help you?"
 template welcomemsg(help): "Sorry, I cannot understand you. Please tell me again what you are looking for."
 template welcomemsg(more) : "Can I help you with anything else?"
 template bad() : "Sorry I am a bit confused; please tell me again what you are looking for."
-template closingmsg() : "Thank you, goodbye."
+template closingmsg() : "Thank you, goodbye. Have a nice visit at the Wilhelma."
 template opening(): "The opening hours of the Wilhelma are as follows: Main Entrance: November to February: 8:15 - 16:30, Main Entrance: March and October: 8:15 - 18:30, Main Entrance: April and September: 8:15 - 19:30, Main Entrance: May to August: 8:15 - 20:00, Entrance Rosensteinpark: November to February: 9:15 - 15:30, Entrance Rosensteinpark: March to October: 9:00 - 16:30, Animal and Plant Houses: January and February: 9:00 - 16:00, Animal and Plant Houses: March and October: 9:00 - 17:30, Animal and Plant Houses: April, August, and September: 9:00 - 18:00, Animal and Plant Houses: May to July: 9:00 - 18:30, Animal and Plant Houses: November and December: 9:00 - 15:45"
 
+template visit(): "It would be best to visit the animals in the following order:"
 # System Requests
 
 template request(primary_fur_color): "What should the primary fur color of the animal be?"
@@ -16,7 +17,7 @@ template request(degree_of_endangering): "What should the degree of endangering 
 template request(social_structure): "What should the social structure of the animal be?"
 template request(location_Wilhelma): "What should the animal's location in the Wilhelma be?"
 
-template request(visiting_path): "Which three animals would you like to visit?"
+# template request(visiting_path): "Which three animals would you like to visit?"
 
 # Rules for System Inform
 
@@ -45,10 +46,9 @@ function info(slot, value, name)
     if slot = "specialities": "{value}"
         if value = "None": "has no recorded speciality"
     if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
-    if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
     if slot = "sponsorship": "can be sponsored with {value} € over one to five years - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
         if value = "None": "does not have a specified amount of sponsoring"
-    if slot = "feeding_time": "is fed {value}"
+    if slot = "feeding_time": "is fed at {value}"
         if value = "None": "is unfortunately not fed publicly"
 
 
@@ -81,7 +81,6 @@ template inform_alternatives(name, *slots)
 
 	special_case name = "none"
 		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
-
 
 # ----------------------------System Confirm----------------------------------#
 
@@ -117,6 +116,9 @@ template reqmore(social_structure)
 template reqmore(location_Wilhelma)
     if location_Wilhelma = "dontcare"           
         "Would you like me to look for an animal belonging to any location in the Wilhelma?"
+
+template reqanimal()
+    "Which other animal would you like to visit?"
 
 # ---------------------------System Select----------------------------------#
 
