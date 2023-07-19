@@ -107,6 +107,7 @@ class BeliefState:
         belief_state = {"user_acts": set(),
                         "informs": {},
                         "requests": {},
+                        "visiting_path": [],
                         "num_matches": 0,
                         "discriminable": True}
 
@@ -201,9 +202,6 @@ class BeliefState:
 
         candidates = []
         for req_slot in self._history[turn_idx]['requests']:
-            #if req_slot == "opening_hours":
-             #   return "Main Entrance: November to February: 8:15 - 16:30"
-            #else:
             candidates.append(req_slot)
         return candidates
 
