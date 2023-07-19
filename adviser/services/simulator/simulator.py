@@ -52,6 +52,7 @@ class HandcraftedUserSimulator(Service):
                                 SysActionType.Confirm: self._receive_confirm,
                                 SysActionType.Select: self._receive_select,
                                 SysActionType.RequestMore: self._receive_requestmore,
+                                SysActionType.ReqNextAnimal: self._receive_requestanimal,
                                 SysActionType.Bad: self._receive_bad,
                                 SysActionType.ConfirmRequest: self._receive_confirmrequest}
 
@@ -365,6 +366,26 @@ class HandcraftedUserSimulator(Service):
         
         Args:
             sys_act (SysAct): the last system action        
+        """
+        if self.goal.is_fulfilled():
+            # end dialog
+            self._finish_dialog()
+        elif (not self.agenda.contains_action_of_type(UserActionType.Inform)
+              and self.goal.requests['name'] is not None):
+            # venue has been offered and all informs have been issued, but atleast one request slot
+            # is missing
+            if self.agenda.is_empty():
+                self.agenda.fill_with_requests(self.goal)
+        else:
+            # make sure that dialog becomes longer
+            self._repeat_last_actions()
+
+    def _receive_requestanimal(self, sys_act: SysAct):
+        """
+        Processes a requestmore action from the system.
+
+        Args:
+            sys_act (SysAct): the last system action
         """
         if self.goal.is_fulfilled():
             # end dialog
