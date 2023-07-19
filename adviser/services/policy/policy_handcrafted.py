@@ -154,13 +154,51 @@ class HandcraftedPolicy(Service):
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
 
+
+
         else:
             sys_act, sys_state = self._next_action(beliefstate)
         if self.logger:
             self.logger.dialog_turn("System Action: " + str(sys_act))
         if "last_act" not in sys_state:
             sys_state["last_act"] = sys_act
+
+        if len(beliefstate["visiting_path"]) >= 3 or "visiting_path" in beliefstate["requests"]:
+            path = self.get_visiting_path(beliefstate)
+            print(path)
+            sys_act = SysAct()
+            sys_act.type = SysActionType.VisitingPath
+            sys_act.add_value("animal1", path[0])
+            # sys_act.add_value("animal2", path[1])
+            # sys_act.add_value("animal3", path[2])
+
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
+        elif len(beliefstate["visiting_path"]) < 3:
+            sys_act = SysAct()
+            beliefstate["visiting_path"].append(self._get_name(beliefstate))
+            print(beliefstate["visiting_path"])
+            sys_act.type = SysActionType.ReqNextAnimal
+
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
+
+
+
+
         return {'sys_act': sys_act, "sys_state": sys_state}
+
+    def get_visiting_path(self, beliefstate: BeliefState):
+        """
+        function to receive the visiting path (the animals mentioned by the user)
+        :param beliefstate: (BeliefState): BeliefState object - includes list of all
+                                           current UserActionTypes
+        :return: the sorted list of animal visits
+        """
+        animals_to_visit = beliefstate["visiting_path"]
+        feeding_time = [(animal,
+                         self.domain.find_info_about_entity(animal, "feeding_time")) for animal in animals_to_visit]
+        return sorted(feeding_time, key=lambda x: x[1])
 
     def _remove_gen_actions(self, beliefstate: BeliefState):
         """
