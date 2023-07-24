@@ -57,8 +57,9 @@ class HandcraftedPolicy(Service):
             domain {domain.jsonlookupdomain.JSONLookupDomain} -- Domain
 
         """
-        self.first_turn = True
         Service.__init__(self, domain=domain)
+        self.first_turn = True
+        # Service.__init__(self, domain=domain)
         self.current_suggestions = []  # list of current suggestions
         self.s_index = 0  # the index in current suggestions for the current system reccomendation
         self.domain_key = domain.get_primary_key()
@@ -154,7 +155,26 @@ class HandcraftedPolicy(Service):
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
 
+        elif len(beliefstate["visiting_path"]) >= 3 or "visiting_path" in beliefstate["requests"]:
+            path = self.get_visiting_path(beliefstate)
+            sys_act = SysAct()
+            # sys_act.type = SysActionType.VisitingPath
+            sys_act.type = SysActionType.VisitingPath
+            # slot is animal's name, value is feeding time
+            sys_act.add_value("nameone", path[0][0])
+            # sys_act.add_value(path[0][0], path[0][1])
+            sys_act.add_value("name1", path[1][0])
+            sys_act.add_value("name2", path[2][0])
+            print(sys_act.slot_values.items())
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
 
+        elif 1 <= len(beliefstate["visiting_path"]) < 3:
+
+            sys_act = SysAct()
+            sys_act.type = SysActionType.ReqNextAnimal
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
 
         else:
             sys_act, sys_state = self._next_action(beliefstate)
@@ -162,29 +182,6 @@ class HandcraftedPolicy(Service):
             self.logger.dialog_turn("System Action: " + str(sys_act))
         if "last_act" not in sys_state:
             sys_state["last_act"] = sys_act
-
-        if len(beliefstate["visiting_path"]) >= 3 or "visiting_path" in beliefstate["requests"]:
-            path = self.get_visiting_path(beliefstate)
-            print(path)
-            sys_act = SysAct()
-            sys_act.type = SysActionType.VisitingPath
-            sys_act.add_value("animal1", path[0])
-            # sys_act.add_value("animal2", path[1])
-            # sys_act.add_value("animal3", path[2])
-
-            sys_state["last_act"] = sys_act
-            return {'sys_act': sys_act, "sys_state": sys_state}
-        elif len(beliefstate["visiting_path"]) < 3:
-            sys_act = SysAct()
-            beliefstate["visiting_path"].append(self._get_name(beliefstate))
-            print(beliefstate["visiting_path"])
-            sys_act.type = SysActionType.ReqNextAnimal
-
-            sys_state["last_act"] = sys_act
-            return {'sys_act': sys_act, "sys_state": sys_state}
-
-
-
 
         return {'sys_act': sys_act, "sys_state": sys_state}
 
@@ -198,7 +195,18 @@ class HandcraftedPolicy(Service):
         animals_to_visit = beliefstate["visiting_path"]
         feeding_time = [(animal,
                          self.domain.find_info_about_entity(animal, "feeding_time")) for animal in animals_to_visit]
-        return sorted(feeding_time, key=lambda x: x[1])
+        feeding_list = []
+        # original list is: [('animal_name', [{'feeding_time': 'time'}])]
+        # remove unnecessary list around dict
+        for value in feeding_time:
+            feeding_list.append((value[0], value[1][0]))
+
+        # create dict containing only {animal_name: actual feeding time}
+        final_dict = dict()
+        for item in feeding_list:
+            final_dict[item[0]] = item[1]["feeding_time"]
+
+        return sorted(final_dict.items(), key=lambda x: x[1])
 
     def _remove_gen_actions(self, beliefstate: BeliefState):
         """
@@ -238,7 +246,7 @@ class HandcraftedPolicy(Service):
         --LV
         """
         # determine if an entity has already been suggested or was mentioned by the user
-        name = self._get_name(beliefstate)
+        name = self.get_name(beliefstate)
         # if yes and the user is asking for info about a specific entity, generate a query to get
         # that info for the slots they have specified
         if name and beliefstate['requests']:
@@ -250,7 +258,7 @@ class HandcraftedPolicy(Service):
             constraints, _ = self._get_constraints(beliefstate)
             return self.domain.find_entities(constraints)
 
-    def _get_name(self, beliefstate: BeliefState):
+    def get_name(self, beliefstate: BeliefState):
         """Finds if an entity has been suggested by the system (in the form of an offer candidate)
            or by the user (in the form of an InformByName act). If so returns the identifier for
            it, otherwise returns None
@@ -338,7 +346,7 @@ class HandcraftedPolicy(Service):
         sys_state = {}
         # Assuming this happens only because domain is not actually active --LV
         if UserActionType.Bad in beliefstate['user_acts'] or beliefstate['requests'] \
-                and not self._get_name(beliefstate):
+                and not self.get_name(beliefstate):
             sys_act = SysAct()
             sys_act.type = SysActionType.Bad
             return sys_act, {'last_act': sys_act}
@@ -353,7 +361,7 @@ class HandcraftedPolicy(Service):
                 and not beliefstate['requests']:
             sys_act = SysAct()
             sys_act.type = SysActionType.InformByName
-            sys_act.add_value(self.domain.get_primary_key(), self._get_name(beliefstate))
+            sys_act.add_value(self.domain.get_primary_key(), self.get_name(beliefstate))
             return sys_act, {'last_act': sys_act}
 
         # Otherwise we need to query the db to determine next action
@@ -515,7 +523,7 @@ class HandcraftedPolicy(Service):
                 sys_act.add_value(k, res)
             # Name might not be a constraint in request queries, so add it
             if self.domain_key not in keys:
-                name = self._get_name(beliefstate)
+                name = self.get_name(beliefstate)
                 sys_act.add_value(self.domain_key, name)
         else:
             sys_act.add_value(self.domain_key, 'none')
