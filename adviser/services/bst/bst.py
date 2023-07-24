@@ -23,6 +23,7 @@ from services.service import PublishSubscribe
 from services.service import Service
 from utils.beliefstate import BeliefState
 from utils.useract import UserActionType, UserAct
+from services.policy import HandcraftedPolicy
 
 
 class HandcraftedBST(Service):
@@ -32,8 +33,12 @@ class HandcraftedBST(Service):
 
     def __init__(self, domain=None, logger=None):
         Service.__init__(self, domain=domain)
+        HandcraftedPolicy.__init__(self, domain=domain)
+
         self.logger = logger
         self.bs = BeliefState(domain)
+        self.policy = HandcraftedPolicy(domain)
+        # self.bs["visiting_path"].append(self._get_name(self.bs))
 
     @PublishSubscribe(sub_topics=["user_acts"], pub_topics=["beliefstate"])
     def update_bst(self, user_acts: List[UserAct] = None) \
@@ -140,6 +145,9 @@ class HandcraftedBST(Service):
                     self.bs['informs'][act.slot][act.value] = act.score
                 else:
                     self.bs['informs'][act.slot] = {act.value: act.score}
+                # add information about visiting path
+                if act.value not in self.bs["visiting_path"] and act.slot == 'name':
+                    self.bs["visiting_path"].append(act.value)
             elif act.type == UserActionType.NegativeInform:
                 # reset mentioned value to zero probability
                 if act.slot in self.bs['informs']:
@@ -149,3 +157,5 @@ class HandcraftedBST(Service):
                 # This way it is clear that the user is no longer asking about that one item
                 if self.domain.get_primary_key() in self.bs['informs']:
                     del self.bs['informs'][self.domain.get_primary_key()]
+
+
