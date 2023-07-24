@@ -37,6 +37,8 @@ class SysActionType(Enum):
     Bye = 'closingmsg'
     ConfirmRequest = 'confreq'
     OpeningHours = 'opening'
+    VisitingPath = 'visit'
+    ReqNextAnimal = 'reqanimal'
 
 
 class SysAct(object):

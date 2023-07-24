@@ -39,6 +39,7 @@ class UserActionType(Enum):
     Confirm = 'confirm'
     SelectDomain = 'selectdomain'
     OpeningHours = 'opening'
+    VisitingPath = 'visit'
 
 
 class UserAct(object):
