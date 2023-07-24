@@ -119,6 +119,7 @@ class HandcraftedNLU(Service):
         self.slots_informed = set()
         self.slots_requested = set()
         self.req_everything = False
+        self.reqall = False
 
     @PublishSubscribe(sub_topics=["user_utterance"], pub_topics=["user_acts"])
     def extract_user_acts(self, user_utterance: str = None) -> dict(user_acts=List[UserAct]):
@@ -139,6 +140,7 @@ class HandcraftedNLU(Service):
 
         # Setting request everything to False at every turn
         self.req_everything = False
+        self.reqall = False
 
         self.user_acts = []
 
@@ -249,6 +251,10 @@ class HandcraftedNLU(Service):
                     self.req_everything = True
 
 
+                elif user_act_type == 'reqall':
+                    self.reqall = True
+
+
                 else:
                     # This section covers all general user acts that do not depend on
                     # the dialog history
@@ -318,6 +324,7 @@ class HandcraftedNLU(Service):
         for slot in self.USER_INFORMABLE:
             for value in self.inform_regex[slot]:
                 if self._check(re.search(self.inform_regex[slot][value], user_utterance, re.I)):
+                    # if slot == self.domain_key and self.req_everything:
                     if slot == self.domain_key and self.req_everything:
                         # Adding all requestable slots because of the req_everything
                         for req_slot in self.USER_REQUESTABLE:
