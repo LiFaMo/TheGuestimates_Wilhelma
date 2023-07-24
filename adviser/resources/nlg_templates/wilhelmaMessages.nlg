@@ -7,7 +7,6 @@ template bad() : "Sorry I am a bit confused; please tell me again what you are l
 template closingmsg() : "Thank you, goodbye. Have a nice visit at the Wilhelma."
 template opening(): "The opening hours of the Wilhelma are as follows: Main Entrance: November to February: 8:15 - 16:30, Main Entrance: March and October: 8:15 - 18:30, Main Entrance: April and September: 8:15 - 19:30, Main Entrance: May to August: 8:15 - 20:00, Entrance Rosensteinpark: November to February: 9:15 - 15:30, Entrance Rosensteinpark: March to October: 9:00 - 16:30, Animal and Plant Houses: January and February: 9:00 - 16:00, Animal and Plant Houses: March and October: 9:00 - 17:30, Animal and Plant Houses: April, August, and September: 9:00 - 18:00, Animal and Plant Houses: May to July: 9:00 - 18:30, Animal and Plant Houses: November and December: 9:00 - 15:45"
 
-template visit(): "It would be best to visit the animals in the following order:"
 # System Requests
 
 template request(primary_fur_color): "What should the primary fur color of the animal be?"
@@ -92,6 +91,13 @@ template confirm(name, *slots)
 template confirm(*slots)
 	"Let me confirm, you are looking for an animal that {for_entry(slots, "info", ", ", " and ", "none")}, right?"
 
+# ---------------------------System VisitingPath----------------------------#
+
+template visit(name, nametwo, namethree, *slots)
+	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+
+	special_case name = "none"
+		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
 
 # ---------------------------System RequestMore------------------------------#
 
@@ -116,6 +122,8 @@ template reqmore(social_structure)
 template reqmore(location_Wilhelma)
     if location_Wilhelma = "dontcare"           
         "Would you like me to look for an animal belonging to any location in the Wilhelma?"
+
+# ---------------------------System RequestAnimal---------------------------#
 
 template reqanimal()
     "Which other animal would you like to visit?"
