@@ -66,6 +66,8 @@ class HandcraftedPolicy(Service):
         self.logger = logger
         self.max_turns = max_turns
 
+        self.beliefstate = BeliefState(domain)
+
     def dialog_start(self):
         """
             resets the policy after each dialog
@@ -155,22 +157,40 @@ class HandcraftedPolicy(Service):
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
 
-        elif len(beliefstate["visiting_path"]) >= 3 or "visiting_path" in beliefstate["requests"]:
+        # if list containing animals to visit is modulo 3 = 0, proceed, store names and times and return
+        elif len(beliefstate["visiting_path"]) % 3 == 0 and "visiting_path" in beliefstate["requests"]:
             path = self.get_visiting_path(beliefstate)
+            print("path", path)
             sys_act = SysAct()
-            # sys_act.type = SysActionType.VisitingPath
+            sys_act.add_value("nameone", path[0][0])  # add first name
+            sys_act.add_value("nametwo", path[1][0])  # add second name
+            sys_act.add_value("namethree", path[2][0])  # add third name
+            # do some preprocessing since I could not make it work
+            # that special_case works with values from list (not "none")
+            # NOTE: first and third cannot be equal since there are only two equal times each.
+            # after sorting those are either first and second or second and third
+            # if first and second time are equal - change first time to "same" to add a special_case
+            if path[0][1] == path[1][1] and path[0][1] != "None":
+                sys_act.add_value("feedingone", "same")  # add first time
+                sys_act.add_value("feedingtwo", path[1][1])  # add second time
+                sys_act.add_value("feedingthree", path[2][1])  # add third time
+
+            # if second and third time are equal - change second time to "same" to add special_case
+            elif path[1][1] == path[2][1] and path[1][1] != "None":
+                sys_act.add_value("feedingone", path[0][1])  # add first time
+                sys_act.add_value("feedingtwo", "same")  # add second time
+                sys_act.add_value("feedingthree", path[2][1])  # add third time
+
+            elif path[0][1] != path[1][1] != path[2][1]:
+                sys_act.add_value("feedingone", path[0][1])  # add first time
+                sys_act.add_value("feedingtwo", path[1][1])  # add second time
+                sys_act.add_value("feedingthree", path[2][1])  # add third time
+
             sys_act.type = SysActionType.VisitingPath
-            # slot is animal's name, value is feeding time
-            sys_act.add_value("nameone", path[0][0])
-            # sys_act.add_value(path[0][0], path[0][1])
-            sys_act.add_value("name1", path[1][0])
-            sys_act.add_value("name2", path[2][0])
-            print(sys_act.slot_values.items())
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
-
-        elif 1 <= len(beliefstate["visiting_path"]) < 3:
-
+        # if there are no three (new) animals request next animal
+        elif 1 <= len(beliefstate["visiting_path"]) % 3 != 0 and "visiting_path" in beliefstate["requests"]:
             sys_act = SysAct()
             sys_act.type = SysActionType.ReqNextAnimal
             sys_state["last_act"] = sys_act
@@ -192,7 +212,7 @@ class HandcraftedPolicy(Service):
                                            current UserActionTypes
         :return: the sorted list of animal visits
         """
-        animals_to_visit = beliefstate["visiting_path"]
+        animals_to_visit = beliefstate["visiting_path"][:3]
         feeding_time = [(animal,
                          self.domain.find_info_about_entity(animal, "feeding_time")) for animal in animals_to_visit]
         feeding_list = []
