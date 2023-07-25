@@ -38,7 +38,6 @@ class HandcraftedBST(Service):
         self.logger = logger
         self.bs = BeliefState(domain)
         self.policy = HandcraftedPolicy(domain)
-        # self.bs["visiting_path"].append(self._get_name(self.bs))
 
     @PublishSubscribe(sub_topics=["user_acts"], pub_topics=["beliefstate"])
     def update_bst(self, user_acts: List[UserAct] = None) \
@@ -81,6 +80,13 @@ class HandcraftedBST(Service):
         """
         # initialize belief state
         self.bs = BeliefState(self.domain)
+
+    def _reset_visiting_path(self):
+        """
+            reset visiting path list for new animals
+        """
+        self.bs['visiting_path'] = []
+
 
     def _reset_informs(self, acts: List[UserAct]):
         """
@@ -146,8 +152,12 @@ class HandcraftedBST(Service):
                 else:
                     self.bs['informs'][act.slot] = {act.value: act.score}
                 # add information about visiting path
-                if act.value not in self.bs["visiting_path"] and act.slot == 'name':
-                    self.bs["visiting_path"].append(act.value)
+                if act.value not in self.bs["visiting_path"] and act.slot == 'name' \
+                        and UserActionType.VisitingPath in self.bs["user_acts"]:
+                    # prepend new values to list
+                    # resetting list did not work, so in order to be able to visit new three animals prepend and do same
+                    # for this reason modulo three is used to make sure 3 animals are processed at a time
+                    self.bs["visiting_path"] = [act.value] + self.bs["visiting_path"]
             elif act.type == UserActionType.NegativeInform:
                 # reset mentioned value to zero probability
                 if act.slot in self.bs['informs']:
