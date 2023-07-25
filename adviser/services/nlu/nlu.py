@@ -30,6 +30,7 @@ from utils.common import Language
 from utils.domain.jsonlookupdomain import JSONLookupDomain
 from utils.logger import DiasysLogger
 from utils.sysact import SysAct, SysActionType
+from services.bst.bst import HandcraftedBST
 
 
 def get_root_dir():
@@ -103,6 +104,8 @@ class HandcraftedNLU(Service):
 
         self.language = Language.ENGLISH
         self._initialize()
+
+        self.handcrafted_bst = HandcraftedBST(domain, logger)
 
     def dialog_start(self) -> dict:
         """
@@ -277,6 +280,14 @@ class HandcraftedNLU(Service):
         self._match_request(user_utterance)
         # Find Informs
         self._match_inform(user_utterance)
+
+        if "visit" in user_utterance or "see" in user_utterance:
+            self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                          act_type=UserActionType.Request,
+                                                                          slot="visiting_path")))
+            self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                          act_type=UserActionType.VisitingPath,
+                                                                          slot="visiting_path")))
 
     def _match_request(self, user_utterance: str):
         """
