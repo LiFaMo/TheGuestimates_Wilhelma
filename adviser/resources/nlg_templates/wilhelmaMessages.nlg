@@ -93,11 +93,26 @@ template confirm(*slots)
 
 # ---------------------------System VisitingPath----------------------------#
 
-template visit(name, nametwo, namethree, *slots)
-	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+template visit(nameone, nametwo, namethree, feedingone, feedingtwo, feedingthree)
+	"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock, then visit the {nametwo} fed at {feedingtwo} o'clock, and finally visit the {namethree} to not miss its public feeding at {feedingthree} o'clock."
 
-	special_case name = "none"
-		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
+    if feedingone = "same"
+        "According to the feeding times, {nameone} and {nametwo} are both fed at {feedingtwo} o'clock. You have to decide which one to visit first. It is best to visit the {namethree} before the animal you chose not to visit during the feeding time to not miss its public feeding at {feedingthree} o'clock."
+
+    if feedingtwo = "same"
+        "According to the feeding times, {nametwo} and {namethree} are both fed at {feedingthree} o'clock. You have to decide which one to visit first. It is best to visit the {nameone} before the animal you chose not to visit during the feeding time to not miss its public feeding at {feedingone} o'clock."
+
+    # all times are none
+	special_case feedingone = "None"
+		"Unfortunately, neither {nameone} nor {nametwo} nor {namethree} is fed publicly, you can visit the animals in any order without missing public feedings."
+
+    # two times are none
+	special_case feedingtwo = "None"
+		"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock. Unfortunately, {nametwo} and {namethree} are not fed publicly, they can therefore be visited at any time."
+
+	special_case feedingthree = "None"
+		"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock, then visit the {nametwo} fed at {feedingtwo} o'clock. Since the {namethree} is not fed publicly, it can be visited at any time."
+
 
 # ---------------------------System RequestMore------------------------------#
 
