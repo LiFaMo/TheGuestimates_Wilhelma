@@ -43,7 +43,7 @@ function info(slot, value, name)
     if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
     if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
     if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
-    if slot = "feeding_time": "is fed {value}"
+    if slot = "feeding_time": "is fed {value} o'clock"
         if value = "None": "is unfortunately not fed publicly"
 
 
