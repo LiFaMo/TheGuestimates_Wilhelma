@@ -214,17 +214,12 @@ class HandcraftedPolicy(Service):
         """
         animals_to_visit = beliefstate["visiting_path"][:3]
         feeding_time = [(animal,
-                         self.domain.find_info_about_entity(animal, "feeding_time")) for animal in animals_to_visit]
-        feeding_list = []
-        # original list is: [('animal_name', [{'feeding_time': 'time'}])]
-        # remove unnecessary list around dict
-        for value in feeding_time:
-            feeding_list.append((value[0], value[1][0]))
+                         self.domain.find_info_about_entity(animal, ["feeding_time"])[0]["feeding_time"]) for animal in animals_to_visit]
 
         # create dict containing only {animal_name: actual feeding time}
         final_dict = dict()
-        for item in feeding_list:
-            final_dict[item[0]] = item[1]["feeding_time"]
+        for item in feeding_time:
+            final_dict[item[0]] = item[1]
 
         return sorted(final_dict.items(), key=lambda x: x[1])
 
@@ -271,6 +266,7 @@ class HandcraftedPolicy(Service):
         # that info for the slots they have specified
         if name and beliefstate['requests']:
             requested_slots = beliefstate['requests']
+            print(requested_slots)
             return self.domain.find_info_about_entity(name, requested_slots)
         # otherwise, issue a query to find all entities which satisfy the constraints the user
         # has given so far
