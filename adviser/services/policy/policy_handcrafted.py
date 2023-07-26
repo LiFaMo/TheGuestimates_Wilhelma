@@ -160,7 +160,6 @@ class HandcraftedPolicy(Service):
         # if list containing animals to visit is modulo 3 = 0, proceed, store names and times and return
         elif len(beliefstate["visiting_path"]) % 3 == 0 and "visiting_path" in beliefstate["requests"]:
             path = self.get_visiting_path(beliefstate)
-            print("path", path)
             sys_act = SysAct()
             sys_act.add_value("nameone", path[0][0])  # add first name
             sys_act.add_value("nametwo", path[1][0])  # add second name
