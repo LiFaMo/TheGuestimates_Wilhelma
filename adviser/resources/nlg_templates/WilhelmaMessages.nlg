@@ -19,7 +19,7 @@ template request(location_Wilhelma): "What should the animal's location in the W
 
 function info(slot, value, name)
 	if slot = "name": "is called: {value}"
-	if slot = "latin_name": "latin name is: \"{value}\""
+	if slot = "latin_name": "'s latin name is: \"{value}\""
 	if slot = "main_food": "mainly eats {value}"
 	if slot = "primary_fur_color": "is mainly {value}"
 	if slot = "weight": "weighs {value}"
@@ -66,13 +66,13 @@ template inform_alternatives(name)
 #------------------------ Name Slot + Slots----------------------------------#
 
 template inform_byname(name, *slots)
-	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
 
 template inform_alternatives(name, *slots)
-	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
