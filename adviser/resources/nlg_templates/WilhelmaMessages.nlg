@@ -1,10 +1,11 @@
 # ---------------NEW RULES - SUPERHERO MESSAGES-------------------------
 
-template welcomemsg(): "Welcome to the Wilhelma Support (WS) chat bot. How may I help you?"
+template welcomemsg(): "Welcome to Automated Smart Knowledge (ASK) about the Wilhelma. How may I help you?"
 template welcomemsg(help): "Sorry, I cannot understand you. Please tell me again what you are looking for."
 template welcomemsg(more) : "Can I help you with anything else?"
 template bad() : "Sorry I am a bit confused; please tell me again what you are looking for."
-template closingmsg() : "Thank you, goodbye."
+template closingmsg() : "Thank you, goodbye. Have a nice visit at the Wilhelma."
+template opening(): "The opening hours of the Wilhelma are as follows: Main Entrance: November to February: 8:15 - 16:30, Main Entrance: March and October: 8:15 - 18:30, Main Entrance: April and September: 8:15 - 19:30, Main Entrance: May to August: 8:15 - 20:00, Entrance Rosensteinpark: November to February: 9:15 - 15:30, Entrance Rosensteinpark: March to October: 9:00 - 16:30, Animal and Plant Houses: January and February: 9:00 - 16:00, Animal and Plant Houses: March and October: 9:00 - 17:30, Animal and Plant Houses: April, August, and September: 9:00 - 18:00, Animal and Plant Houses: May to July: 9:00 - 18:30, Animal and Plant Houses: November and December: 9:00 - 15:45"
 
 # System Requests
 
@@ -15,21 +16,24 @@ template request(degree_of_endangering): "What should the degree of endangering 
 template request(social_structure): "What should the social structure of the animal be?"
 template request(location_Wilhelma): "What should the animal's location in the Wilhelma be?"
 
+# template request(visiting_path): "Which three animals would you like to visit?"
+
 # Rules for System Inform
 
 function info(slot, value, name)
 	if slot = "name": "is called: {value}"
-	if slot = "latin_name": "'s latin name is: \"{value}\""
+	if slot = "latin_name": "latin name is: \"{value}\""
 	if slot = "main_food": "mainly eats {value}"
 	if slot = "primary_fur_color": "is mainly {value}"
 	if slot = "weight": "weighs {value}"
+	    if value = "unknown": "does not have a clearly specified weight"
 	if slot = "continent_of_origin": "comes from {value}"
 	if slot = "habitat": "lives in {value}"
 	if slot = "expected_age": "lives up to {value}"
 	if slot = "gestation_period": "is pregnant for around {value}"
 	if slot = "estimated_population": "has an estimated population of around {value} living on earth nowadays"
 	    if value = "None": "does not have a clear information on its estimated population"
-	if slot = "degree_of_endangering":
+	if slot = "degree_of_endangering"
 	    if value = "not endangered":            "is luckily not endangered nowadays"
 	    if value = "stable":                    "is luckily stable nowadays"
 	    if value = "critically endangered":     "is unfortunately critically endangered"
@@ -41,9 +45,9 @@ function info(slot, value, name)
     if slot = "specialities": "{value}"
         if value = "None": "has no recorded speciality"
     if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
-    if slot = "opening_hours": "opening hours vary depending on the season - you can find an overview here: {value}"
-    if slot = "sponsorship": "a sponsorship for the {name} costs {value} € - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
-    if slot = "feeding_time": "is fed {value} o'clock"
+    if slot = "sponsorship": "can be sponsored with {value} € over one to five years - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
+        if value = "None": "does not have a specified amount of sponsoring"
+    if slot = "feeding_time": "is fed at {value}"
         if value = "None": "is unfortunately not fed publicly"
 
 
@@ -66,17 +70,16 @@ template inform_alternatives(name)
 #------------------------ Name Slot + Slots----------------------------------#
 
 template inform_byname(name, *slots)
-	"The {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
 
 template inform_alternatives(name, *slots)
-	"The {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
-
 
 # ----------------------------System Confirm----------------------------------#
 
@@ -87,6 +90,28 @@ template confirm(name, *slots)
 		"Let me confirm, you are looking for an animal that {for_entry(slots, "info", ", ", " and ", name)}, right?"
 template confirm(*slots)
 	"Let me confirm, you are looking for an animal that {for_entry(slots, "info", ", ", " and ", "none")}, right?"
+
+# ---------------------------System VisitingPath----------------------------#
+
+template visit(nameone, nametwo, namethree, feedingone, feedingtwo, feedingthree)
+	"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock, then visit the {nametwo} fed at {feedingtwo} o'clock, and finally visit the {namethree} to not miss its public feeding at {feedingthree} o'clock."
+
+    if feedingone = "same"
+        "According to the feeding times, {nameone} and {nametwo} are both fed at {feedingtwo} o'clock. You have to decide which one to visit first. It is best to visit the {namethree} before the animal you chose not to visit during the feeding time to not miss its public feeding at {feedingthree} o'clock."
+
+    if feedingtwo = "same"
+        "According to the feeding times, {nametwo} and {namethree} are both fed at {feedingthree} o'clock. You have to decide which one to visit first. It is best to visit the {nameone} before the animal you chose not to visit during the feeding time to not miss its public feeding at {feedingone} o'clock."
+
+    # all times are none
+	special_case feedingone = "None"
+		"Unfortunately, neither {nameone} nor {nametwo} nor {namethree} is fed publicly, you can visit the animals in any order without missing public feedings."
+
+    # two times are none
+	special_case feedingtwo = "None"
+		"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock. Unfortunately, {nametwo} and {namethree} are not fed publicly, they can therefore be visited at any time."
+
+	special_case feedingthree = "None"
+		"According to the feeding times, it would be best to first visit the {nameone} which is fed at {feedingone} o'clock, then visit the {nametwo} fed at {feedingtwo} o'clock. Since the {namethree} is not fed publicly, it can be visited at any time."
 
 
 # ---------------------------System RequestMore------------------------------#
@@ -112,6 +137,11 @@ template reqmore(social_structure)
 template reqmore(location_Wilhelma)
     if location_Wilhelma = "dontcare"           
         "Would you like me to look for an animal belonging to any location in the Wilhelma?"
+
+# ---------------------------System RequestAnimal---------------------------#
+
+template reqanimal()
+    "Which other animal would you like to visit?"
 
 # ---------------------------System Select----------------------------------#
 
