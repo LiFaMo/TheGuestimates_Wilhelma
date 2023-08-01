@@ -40,6 +40,8 @@ class UserActionType(Enum):
     SelectDomain = 'selectdomain'
     OpeningHours = 'opening'
     VisitingPath = 'visit'
+    SamePath = 'same'
+    NewPath = 'new'
 
 
 class UserAct(object):
