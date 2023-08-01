@@ -22,7 +22,7 @@ template request(location_Wilhelma): "What should the animal's location in the W
 
 function info(slot, value, name)
 	if slot = "name": "is called: {value}"
-	if slot = "latin_name": "latin name is: \"{value}\""
+	if slot = "latin_name": "'s latin name is: \"{value}\""
 	if slot = "main_food": "mainly eats {value}"
 	if slot = "primary_fur_color": "is mainly {value}"
 	if slot = "weight": "weighs {value}"
@@ -47,7 +47,7 @@ function info(slot, value, name)
     if slot = "location_Wilhelma": "belongs to the {value} in the Wilhelma"
     if slot = "sponsorship": "can be sponsored with {value} € over one to five years - sponsoring the animal helps the Wilhelma to keep the zoo enclosures in good condition and to take adequate care of the animals."
         if value = "None": "does not have a specified amount of sponsoring"
-    if slot = "feeding_time": "is fed at {value}"
+    if slot = "feeding_time": "is fed at {value} o'clock"
         if value = "None": "is unfortunately not fed publicly"
 
 
@@ -70,13 +70,13 @@ template inform_alternatives(name)
 #------------------------ Name Slot + Slots----------------------------------#
 
 template inform_byname(name, *slots)
-	"The animal called {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The {name} {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no such animal that {for_entry(slots, "info", ", ", " and ", name)}."
 
 template inform_alternatives(name, *slots)
-	"The animal {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
+	"The {name} also {for_entry(slots, "info", ", it ", " and it ", name)}."
 
 	special_case name = "none"
 		"There is no other animal which also {for_entry(slots, "info", ", ", " and ", name)}."
@@ -142,6 +142,12 @@ template reqmore(location_Wilhelma)
 
 template reqanimal()
     "Which other animal would you like to visit?"
+
+template reqother(animal)
+    "Which animal would you like to visit instead of the {animal}?"
+
+template samefeeding(animalone, time, animaltwo)
+    "Unfortunately, {animalone} and {animaltwo} are fed at the same time - at {time}. Would you like to visit another animal instead of {animaltwo}?"
 
 # ---------------------------System Select----------------------------------#
 
