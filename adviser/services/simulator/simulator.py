@@ -53,8 +53,9 @@ class HandcraftedUserSimulator(Service):
                                 SysActionType.Select: self._receive_select,
                                 SysActionType.RequestMore: self._receive_requestmore,
                                 SysActionType.ReqNextAnimal: self._receive_requestanimal,
+                                SysActionType.ReqOtherAnimal: self._receive_requestother,
+                                SysActionType.SameFeedingTime: self._receive_samefeeding,
                                 SysActionType.Bad: self._receive_bad,
-                                SysActionType.VisitingPath: self._receive_visitingpath,
                                 SysActionType.ConfirmRequest: self._receive_confirmrequest}
 
 
@@ -269,31 +270,6 @@ class HandcraftedUserSimulator(Service):
                 and not req_actions_not_in_goal):
             self._finish_dialog()
 
-    def _receive_visitingpath(self, sys_act: SysAct):
-        """
-        Processes an visitingpath action from the system; checks if the inform matches the
-        goal constraints and if yes, will add unanswered requests to the agenda
-
-        Args:
-            sys_act (SysAct): the last system action
-        """
-        # check all system informs for offer
-        inform_list = []
-        offers = []
-        for slot, value_list in sys_act.slot_values.items():
-            for value in value_list:
-                if slot == 'name':
-                    offers.append(value)
-                else:
-                    inform_list.append(Constraint(slot, value))
-
-        # check offer
-        if offers:
-            if self._check_offer(offers, inform_list):
-                # valid offer
-                for slot, value in inform_list:
-                    self.goal.fulfill_request(slot, value)
-
     def _receive_informbyalternatives(self, sys_act: SysAct):
         """
         Processes an informbyalternatives action from the system; this is treated like
@@ -408,6 +384,46 @@ class HandcraftedUserSimulator(Service):
             self._repeat_last_actions()
 
     def _receive_requestanimal(self, sys_act: SysAct):
+        """
+        Processes a requestanimal action from the system.
+
+        Args:
+            sys_act (SysAct): the last system action
+        """
+        if self.goal.is_fulfilled():
+            # end dialog
+            self._finish_dialog()
+        elif (not self.agenda.contains_action_of_type(UserActionType.Inform)
+              and self.goal.requests['name'] is not None):
+            # venue has been offered and all informs have been issued, but atleast one request slot
+            # is missing
+            if self.agenda.is_empty():
+                self.agenda.fill_with_requests(self.goal)
+        else:
+            # make sure that dialog becomes longer
+            self._repeat_last_actions()
+
+    def _receive_requestother(self, sys_act: SysAct):
+        """
+        Processes a requestanimal action from the system.
+
+        Args:
+            sys_act (SysAct): the last system action
+        """
+        if self.goal.is_fulfilled():
+            # end dialog
+            self._finish_dialog()
+        elif (not self.agenda.contains_action_of_type(UserActionType.Inform)
+              and self.goal.requests['name'] is not None):
+            # venue has been offered and all informs have been issued, but atleast one request slot
+            # is missing
+            if self.agenda.is_empty():
+                self.agenda.fill_with_requests(self.goal)
+        else:
+            # make sure that dialog becomes longer
+            self._repeat_last_actions()
+
+    def _receive_samefeeding(self, sys_act: SysAct):
         """
         Processes a requestanimal action from the system.
 

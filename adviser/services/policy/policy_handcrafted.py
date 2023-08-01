@@ -169,6 +169,52 @@ class HandcraftedPolicy(Service):
             # NOTE: first and third cannot be equal since there are only two equal times each.
             # after sorting those are either first and second or second and third
             # if first and second time are equal - change first time to "same" to add a special_case
+            if path[0][1] == path[1][1] and path[1][1] != "None":
+                sys_act = SysAct()
+                sys_act.type = SysActionType.SameFeedingTime
+                sys_act.add_value("animalone", path[0][0])
+                sys_act.add_value("time", path[1][1])
+                sys_act.add_value("animaltwo", path[1][0])
+                sys_state["last_act"] = sys_act
+                return {'sys_act': sys_act, "sys_state": sys_state}
+
+            elif path[2][1] == path[1][1] and path[1][1] != "None":
+                sys_act = SysAct()
+                sys_act.type = SysActionType.SameFeedingTime
+                sys_act.add_value("animalone", path[2][0])
+                sys_act.add_value("time", path[1][1])
+                sys_act.add_value("animaltwo", path[1][0])
+                sys_state["last_act"] = sys_act
+                return {'sys_act': sys_act, "sys_state": sys_state}
+
+            else:
+                sys_act.add_value("feedingone", path[0][1])  # add first time
+                sys_act.add_value("feedingtwo", path[1][1])  # add second time
+                sys_act.add_value("feedingthree", path[2][1])  # add third time
+                sys_state["last_act"] = sys_act
+                sys_act.type = SysActionType.VisitingPath
+            return {'sys_act': sys_act, "sys_state": sys_state}
+        # if there are no three (new) animals request next animal
+        elif 1 <= len(beliefstate["visiting_path"]) % 3 != 0 and "visiting_path" in beliefstate["requests"]:
+            sys_act = SysAct()
+            sys_act.type = SysActionType.ReqNextAnimal
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
+
+        # if user does not want to generate new path for animals with same feeding times
+        elif UserActionType.SamePath in beliefstate["user_acts"]:
+            print("samepath", beliefstate["user_acts"])
+            path = self.get_visiting_path(beliefstate)
+            sys_act = SysAct()
+            sys_act.add_value("nameone", path[0][0])  # add first name
+            sys_act.add_value("nametwo", path[1][0])  # add second name
+            sys_act.add_value("namethree", path[2][0])  # add third name
+            sys_state = {}
+            # do some preprocessing since I could not make it work
+            # that special_case works with values from list (not "none")
+            # NOTE: first and third cannot be equal since there are only two equal times each.
+            # after sorting those are either first and second or second and third
+            # if first and second time are equal - change first time to "same" to add a special_case
             if path[0][1] == path[1][1] and path[0][1] != "None":
                 sys_act.add_value("feedingone", "same")  # add first time
                 sys_act.add_value("feedingtwo", path[1][1])  # add second time
@@ -179,19 +225,16 @@ class HandcraftedPolicy(Service):
                 sys_act.add_value("feedingone", path[0][1])  # add first time
                 sys_act.add_value("feedingtwo", "same")  # add second time
                 sys_act.add_value("feedingthree", path[2][1])  # add third time
-
-            elif path[0][1] != path[1][1] != path[2][1]:
-                sys_act.add_value("feedingone", path[0][1])  # add first time
-                sys_act.add_value("feedingtwo", path[1][1])  # add second time
-                sys_act.add_value("feedingthree", path[2][1])  # add third time
-
             sys_act.type = SysActionType.VisitingPath
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
-        # if there are no three (new) animals request next animal
-        elif 1 <= len(beliefstate["visiting_path"]) % 3 != 0 and "visiting_path" in beliefstate["requests"]:
+
+        # if user wants to exchange one animal from list due to same feeding times
+        elif UserActionType.NewPath in beliefstate["user_acts"]:
+            path = self.get_visiting_path(beliefstate)
             sys_act = SysAct()
-            sys_act.type = SysActionType.ReqNextAnimal
+            sys_act.type = SysActionType.ReqOtherAnimal
+            sys_act.add_value("animal", path[1][0])
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
 

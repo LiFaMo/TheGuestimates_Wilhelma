@@ -81,13 +81,6 @@ class HandcraftedBST(Service):
         # initialize belief state
         self.bs = BeliefState(self.domain)
 
-    def _reset_visiting_path(self):
-        """
-            reset visiting path list for new animals
-        """
-        self.bs['visiting_path'] = []
-
-
     def _reset_informs(self, acts: List[UserAct]):
         """
             If the user specifies a new value for a given slot, delete the old
@@ -106,7 +99,7 @@ class HandcraftedBST(Service):
         self.bs['requests'] = {}
 
     def _get_all_usr_action_types(self, user_acts: List[UserAct]) -> Set[UserActionType]:
-        """ 
+        """
         Returns a set of all different UserActionTypes in user_acts.
 
         Args:
@@ -129,7 +122,7 @@ class HandcraftedBST(Service):
                 user_acts (list[UserAct]): the list of user acts to use to update the belief state
 
         """
-        
+
         # reset any offers if the user informs any new information
         if self.domain.get_primary_key() in self.bs['informs'] \
                 and UserActionType.Inform in self.bs["user_acts"]:
@@ -154,10 +147,15 @@ class HandcraftedBST(Service):
                 # add information about visiting path
                 if act.value not in self.bs["visiting_path"] and act.slot == 'name' \
                         and UserActionType.VisitingPath in self.bs["user_acts"]:
-                    # prepend new values to list
-                    # resetting list did not work, so in order to be able to visit new three animals prepend and do same
-                    # for this reason modulo three is used to make sure 3 animals are processed at a time
-                    self.bs["visiting_path"] = [act.value] + self.bs["visiting_path"]
+                    if UserActionType.NewPath in self.bs["user_acts"]:
+                        self.bs["visiting_path"].remove(self.bs["visiting_path"][1])
+                        self.bs["visiting_path"] = [act.value] + self.bs["visiting_path"]
+                    else:
+                        # prepend new values to list
+                        # resetting list did not work, so in order to be able to visit new three animals
+                        # prepend and do same
+                        # for this reason modulo three is used to make sure 3 animals are processed at a time
+                        self.bs["visiting_path"] = [act.value] + self.bs["visiting_path"]
             elif act.type == UserActionType.NegativeInform:
                 # reset mentioned value to zero probability
                 if act.slot in self.bs['informs']:
@@ -167,5 +165,4 @@ class HandcraftedBST(Service):
                 # This way it is clear that the user is no longer asking about that one item
                 if self.domain.get_primary_key() in self.bs['informs']:
                     del self.bs['informs'][self.domain.get_primary_key()]
-
 
