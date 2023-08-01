@@ -309,6 +309,11 @@ class HandcraftedNLU(Service):
                                                                               act_type=UserActionType.VisitingPath,
                                                                               slot="visiting_path")))
 
+        if ("all" or "every") in user_utterance:
+            self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                          act_type=UserActionType.AllInfo,
+                                                                          slot="all_info")))
+
     def _match_request(self, user_utterance: str):
         """
         Iterates over all user request regexes and find matches with the user utterance

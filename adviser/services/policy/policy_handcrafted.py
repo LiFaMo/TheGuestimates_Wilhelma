@@ -203,7 +203,6 @@ class HandcraftedPolicy(Service):
 
         # if user does not want to generate new path for animals with same feeding times
         elif UserActionType.SamePath in beliefstate["user_acts"]:
-            print("samepath", beliefstate["user_acts"])
             path = self.get_visiting_path(beliefstate)
             sys_act = SysAct()
             sys_act.add_value("nameone", path[0][0])  # add first name
@@ -238,6 +237,17 @@ class HandcraftedPolicy(Service):
             sys_state["last_act"] = sys_act
             return {'sys_act': sys_act, "sys_state": sys_state}
 
+        # if user wants to exchange one animal from list due to same feeding times
+        elif UserActionType.AllInfo in beliefstate["user_acts"]:
+            slots = self.get_all_info(beliefstate)
+            sys_act = SysAct()
+            sys_act.type = SysActionType.AllInfo
+            for slot_dict in slots:
+                for key in slot_dict:
+                    sys_act.add_value(key, slot_dict[key])
+            sys_state["last_act"] = sys_act
+            return {'sys_act': sys_act, "sys_state": sys_state}
+
         else:
             sys_act, sys_state = self._next_action(beliefstate)
         if self.logger:
@@ -264,6 +274,20 @@ class HandcraftedPolicy(Service):
             final_dict[item[0]] = item[1]
 
         return sorted(final_dict.items(), key=lambda x: x[1])
+
+    def get_all_info(self, beliefstate: BeliefState):
+        """
+        function to get all information about an animal
+        :param beliefstate: (BeliefState): BeliefState object - includes list of all
+                                           current UserActionTypes
+        :return: the sorted list of animal visits
+        """
+        all_slots = []
+        name = self.get_name(beliefstate)
+        requested_slots = self.domain.get_requestable_slots()[:-2]
+        for slot in requested_slots:
+            all_slots.append(self.domain.find_info_about_entity(name, [slot])[0])
+        return all_slots
 
     def _remove_gen_actions(self, beliefstate: BeliefState):
         """
@@ -308,7 +332,6 @@ class HandcraftedPolicy(Service):
         # that info for the slots they have specified
         if name and beliefstate['requests']:
             requested_slots = beliefstate['requests']
-            print(requested_slots)
             return self.domain.find_info_about_entity(name, requested_slots)
         # otherwise, issue a query to find all entities which satisfy the constraints the user
         # has given so far
