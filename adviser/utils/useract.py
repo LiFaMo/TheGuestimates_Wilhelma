@@ -42,6 +42,7 @@ class UserActionType(Enum):
     VisitingPath = 'visit'
     SamePath = 'same'
     NewPath = 'new'
+    AllInfo = 'all_info'
 
 
 class UserAct(object):
