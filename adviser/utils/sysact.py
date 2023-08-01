@@ -39,6 +39,9 @@ class SysActionType(Enum):
     OpeningHours = 'opening'
     VisitingPath = 'visit'
     ReqNextAnimal = 'reqanimal'
+    ReqOtherAnimal = 'reqother'
+    SameFeedingTime = 'samefeeding'
+    AllInfo = 'all_info'
 
 
 class SysAct(object):

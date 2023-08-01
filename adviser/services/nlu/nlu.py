@@ -157,7 +157,6 @@ class HandcraftedNLU(Service):
 
         self._solve_informable_values()
 
-
         # If nothing else has been matched, see if the user chose a domain; otherwise if it's
         # not the first turn, it's a bad act
         if len(self.user_acts) == 0:
@@ -240,6 +239,16 @@ class HandcraftedNLU(Service):
                         user_act = UserAct(text=user_utterance, act_type=UserActionType.Bye)
                         self.user_acts.append(user_act)
 
+                    elif self.sys_act_info['last_act'].type == SysActionType.SameFeedingTime \
+                            and user_act_type == UserActionType.Deny:
+                        user_act = UserAct(text=user_utterance, act_type=UserActionType.SamePath)
+                        self.user_acts.append(user_act)
+
+                    elif self.sys_act_info['last_act'].type == SysActionType.SameFeedingTime \
+                            and user_act_type == UserActionType.Affirm:
+                        user_act = UserAct(text=user_utterance, act_type=UserActionType.NewPath)
+                        self.user_acts.append(user_act)
+
                 # Check if Request or Select is the previous system act
                 elif user_act_type == 'dontcare':
                     if self.sys_act_info['last_act'].type == SysActionType.Request or \
@@ -282,12 +291,28 @@ class HandcraftedNLU(Service):
         self._match_inform(user_utterance)
 
         if "visit" in user_utterance or "see" in user_utterance:
+            if "instead" in user_utterance:
+                self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                              act_type=UserActionType.Request,
+                                                                              slot="visiting_path")))
+                self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                              act_type=UserActionType.VisitingPath,
+                                                                              slot="visiting_path")))
+                self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                              act_type=UserActionType.NewPath,
+                                                                              slot="visiting_path")))
+            else:
+                self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                              act_type=UserActionType.Request,
+                                                                              slot="visiting_path")))
+                self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
+                                                                              act_type=UserActionType.VisitingPath,
+                                                                              slot="visiting_path")))
+
+        if ("all" or "every") in user_utterance:
             self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
-                                                                          act_type=UserActionType.Request,
-                                                                          slot="visiting_path")))
-            self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
-                                                                          act_type=UserActionType.VisitingPath,
-                                                                          slot="visiting_path")))
+                                                                          act_type=UserActionType.AllInfo,
+                                                                          slot="all_info")))
 
     def _match_request(self, user_utterance: str):
         """
@@ -345,7 +370,7 @@ class HandcraftedNLU(Service):
                                 self._add_request(user_utterance, req_slot)
                     # Adding user inform act
                     self._add_inform(user_utterance, slot, value)
-        
+
     def _add_inform(self, user_utterance: str, slot: str, value: str):
         """
         Creates the user request act and adds it to the user act list
@@ -422,7 +447,6 @@ class HandcraftedNLU(Service):
             # TODO: Create a clever and meaningful mechanism to assign scores
             # Since the user acts are matched, they get 1.0 as score
             self.user_acts[i].score = 1.0
-
 
     def _disambiguate_co_occurrence(self, beliefstate: BeliefState):
         # Check if there is user inform and request occur simultaneously for a binary slot
