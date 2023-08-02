@@ -309,7 +309,7 @@ class HandcraftedNLU(Service):
                                                                               act_type=UserActionType.VisitingPath,
                                                                               slot="visiting_path")))
 
-        if ("all" or "every") in user_utterance and "potentially" not in user_utterance:
+        if ("all" or "every") in user_utterance and ("potentially" and "critically") not in user_utterance:
             self.handcrafted_bst.update_bst(self.user_acts.append(UserAct(text=user_utterance,
                                                                           act_type=UserActionType.AllInfo,
                                                                           slot="all_info")))
